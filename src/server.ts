@@ -3,7 +3,8 @@ import * as auth from 'express-basic-auth';
 import * as cors from 'cors';
 import logger from './utils/logger';
 import * as morgan from 'morgan';
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
+import * as expressPouchDb from 'express-pouchdb';
 
 class MyStream {
   write(text: string) {
@@ -22,7 +23,7 @@ app.use(
 );
 app.use(morgan('tiny', { stream }));
 
-app.use('/db', require('express-pouchdb')(PouchDB));
+app.use('/db', expressPouchDb(PouchDB));
 
 app.listen({ port: process.env.PORT || 8080 }, () =>
   console.log(
