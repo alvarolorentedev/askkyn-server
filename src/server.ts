@@ -15,12 +15,20 @@ class MyStream {
 const stream = new MyStream();
 
 const app = express();
-app.use(cors());
-app.use(
-  auth({
-    users: { admin: 'supersecret' },
+const whitelist = [
+  "http://127.0.0.1:8000",
+  "https://127.0.0.1:8000",
+  "http://localhost:8000",
+  "https://localhost:8000",
+  "http://localhost:3000",
+  "https://localhost:3000"
+];
+app.use(cors({
+    origin: whitelist,
+    credentials: true
   })
 );
+
 app.use(morgan('tiny', { stream }));
 
 app.use('/db', expressPouchDb(PouchDB));
