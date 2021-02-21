@@ -16,7 +16,8 @@ const stream = new MyStream();
 
 const app = express();
 const whitelist = [
-  /\.askkyn\.com$/,
+  "https://www.askkyn.com",
+  "http://www.askkyn.com",
   'http://127.0.0.1:8000',
   'https://127.0.0.1:8000',
   'http://localhost:8000',
