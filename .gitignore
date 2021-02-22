@@ -104,8 +104,9 @@ dist
 .tern-port
 
 log.txt
-pouch__all_dbs__/
-_users/
-_replicator/
+pouch__all_dbs__
+_users
+_replicator
 askkyn/
 config.json
+test.db

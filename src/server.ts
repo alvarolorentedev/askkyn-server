@@ -5,6 +5,7 @@ import logger from './utils/logger';
 import * as morgan from 'morgan';
 import * as PouchDB from 'pouchdb';
 import * as expressPouchDb from 'express-pouchdb';
+import * as sqlDown from 'sqldown';
 
 class MyStream {
   write(text: string) {
@@ -32,9 +33,14 @@ app.use(
   })
 );
 
-app.use(morgan('tiny', { stream }));
+const sqlPouchDB = PouchDB.defaults({db: sqlDown});
 
-app.use('/db', expressPouchDb(PouchDB));
+app.use(morgan('tiny', { stream }));
+app.use('/db', expressPouchDb(sqlPouchDB));
+
+const dbConnection =  process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : "test.db"
+
+const myPouchInstance = sqlPouchDB(dbConnection)
 
 app.listen({ port: process.env.PORT || 8080 }, () =>
   console.log(
