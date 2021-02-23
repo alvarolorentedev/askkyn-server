@@ -39,7 +39,9 @@ app.use(morgan('tiny', { stream }));
 app.use('/db', expressPouchDb(sqlPouchDB));
 
 const dbConnection =
-  process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : 'test.db';
+  process.env.NODE_ENV === 'production'
+    ? 'pg://wawvkqbphmvavu:a60dd0e1b5cc6655a950c1a21239e38872678c9424b40f418346757131873c8f@ec2-54-247-158-179.eu-west-1.compute.amazonaws.com:5432/det1ho3dnt28s0'
+    : 'test.db';
 
 const myPouchInstance = sqlPouchDB(dbConnection);
 
