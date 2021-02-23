@@ -33,14 +33,15 @@ app.use(
   })
 );
 
-const sqlPouchDB = PouchDB.defaults({db: sqlDown});
+const sqlPouchDB = PouchDB.defaults({ db: sqlDown });
 
 app.use(morgan('tiny', { stream }));
 app.use('/db', expressPouchDb(sqlPouchDB));
 
-const dbConnection =  process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : "test.db"
+const dbConnection =
+  process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : 'test.db';
 
-const myPouchInstance = sqlPouchDB(dbConnection)
+const myPouchInstance = sqlPouchDB(dbConnection);
 
 app.listen({ port: process.env.PORT || 8080 }, () =>
   console.log(
