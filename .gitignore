@@ -109,4 +109,4 @@ _users
 _replicator
 askkyn
 config.json
-test.db
+local.db

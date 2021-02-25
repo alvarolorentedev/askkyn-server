@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as auth from 'express-basic-auth';
 import * as cors from 'cors';
 import logger from './utils/logger';
 import * as morgan from 'morgan';
@@ -38,10 +37,7 @@ const sqlPouchDB = PouchDB.defaults({ db: sqlDown });
 app.use(morgan('tiny', { stream }));
 app.use('/db', expressPouchDb(sqlPouchDB));
 
-const dbConnection =
-  process.env.NODE_ENV === 'production' ? 'test.db' : 'test.db';
-
-const myPouchInstance = sqlPouchDB(dbConnection);
+const localDB = sqlPouchDB('local.db');
 
 app.listen({ port: process.env.PORT || 8080 }, () =>
   console.log(
